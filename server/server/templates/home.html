@@ -1,0 +1,7 @@
+<h2>Home Page</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <h3>This is a simple starter django app, created by Aidan Wigmore.</h3>
+    <button type="submit">Start Building</button>
+</form>
