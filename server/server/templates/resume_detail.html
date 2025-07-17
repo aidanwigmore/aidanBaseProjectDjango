@@ -1,0 +1,203 @@
+{% include "navbar.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test Generated Resume</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                font-size: 10px;
+                width: 95%;
+                margin-left: 5px;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            caption {
+                text-align: left;
+                font-weight: bold;
+                border-bottom: 1px solid black;
+            }
+            th, td {
+                text-align: left;
+                border-bottom: 1px solid #DDD;
+            }
+            #header {
+                padding: 10px;
+                text-align: center;
+            }
+            tr:hover {background-color: #D6EEEE;}
+            .section {
+                padding-bottom: 15px;
+            }
+            h1 {
+                font-size: 20px;
+                padding: 0;
+                margin: 0;
+            }
+            h2 {
+                font-size: 15px;
+                padding: 0;
+                margin: 0;
+            }
+            h3 {
+                font-size: 10px;
+                padding: 0;
+                margin: 0;
+            }
+            ul {
+                margin-top: 0;
+            }
+            li {
+                word-wrap: no-wrap;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header">
+            <div>
+                <h1>{{resume.name}}</h1>
+                <div style="display: block;">
+                    <a href="mailto:{{resume.email}}?subject=Resume%20Inquiry%3A">{{resume.email}}</a>
+                    | <a href="tel:+{{resume.phone}}">{{resume.phone}}</a>
+                </div>
+                <div style="display: block;">
+                    <svg height="12" aria-hidden="true" viewBox="0 0 24 24" version="1.1" width="12" data-view-component="true" class="octicon octicon-mark-github v-align-middle">
+                        <path d="M12 1C5.923 1 1 5.923 1 12c0 4.867 3.149 8.979 7.521 10.436.55.096.756-.233.756-.522 0-.262-.013-1.128-.013-2.049-2.764.509-3.479-.674-3.699-1.292-.124-.317-.66-1.293-1.127-1.554-.385-.207-.936-.715-.014-.729.866-.014 1.485.797 1.691 1.128.99 1.663 2.571 1.196 3.204.907.096-.715.385-1.196.701-1.471-2.448-.275-5.005-1.224-5.005-5.432 0-1.196.426-2.186 1.128-2.956-.111-.275-.496-1.402.11-2.915 0 0 .921-.288 3.024 1.128a10.193 10.193 0 0 1 2.75-.371c.936 0 1.871.123 2.75.371 2.104-1.43 3.025-1.128 3.025-1.128.605 1.513.221 2.64.111 2.915.701.77 1.127 1.747 1.127 2.956 0 4.222-2.571 5.157-5.019 5.432.399.344.743 1.004.743 2.035 0 1.471-.014 2.654-.014 3.025 0 .289.206.632.756.522C19.851 20.979 23 16.854 23 12c0-6.077-4.922-11-11-11Z"></path>
+                    </svg>
+                    <!-- <a href="https://github.com/aidanwigmore" target="_blank" rel="noopener noreferrer">
+                        github
+                    </a>
+                        | 
+                    <a href="https://www.linkedin.com/in/aidan-wigmore-442034222/" target="_blank" rel="noopener noreferrer">
+                        linkedin
+                    </a> -->
+                    <img class="XNo5Ab" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABDUlEQVR4AWP4////gOLB44D6nTcsGIo33QHi/zTGd0B2YTiAPpYjHIHNAf/piQk6wGPW8f/rLz8HYRCbXg5AWI4GQGJ0cwDY12gAJDbcHUA4CkZAIqQUK7Ts/m/SfxBMs5RupswBaACr+P47b/5zlG/5DyzZ/r/+8hNF7vuvP//nn3r0X6JhJ+0ccPrR+/+H7735jw9cf/n5v0D1Nuo5gBxQve06zR0AjoL7b7/+//zjN4bc+ScfaOeA33///k9Yfg4mDw7u/Xdeo6uhnQP6D93FMNxlxjF0ZbRzgMXEQ9iyI90cALIMJoccDXRzAK6CZog6YNQBow6gIx54Bwx4x2RAu2bAysoEZu9o7xgAQrvkxt3WZi0AAAAASUVORK5CYII=" style="height:12px;width:12px" alt="" data-csiid="JndbaIbDCoj8ptQPqI3EwAc_2" data-atf="1">
+                </div>
+            </div>
+        </div>
+
+        <!-- <div>
+            <div class="section" id="education">
+                <table>
+                    <caption><h2>Education</h2></caption>
+                    <tr>
+                        <td style="font-weight: bold;">Ontario College Advanced Diploma - Software Development</td>
+                        <td style="text-align: right;">Sep 2020 to Dec 2024</td>
+                    </tr>
+                    <tr>
+                        <td>Mohawk College</td>
+                        <td style="text-align: right;">Hamilton, Ontario</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="section" id="skills">
+                <table>
+                    <caption><h2>Skills</h2></caption>
+                    <tr>
+                        <td style="text-align: right;font-weight: bold;">Programming Languages:</td>
+                        <td >Typescript, Python, Java, PHP, SQL</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;font-weight: bold;">Skills and Frameworks:</td>
+                        <td>React, Django, Laravel, Git, SQLite, PostgreSQL, HerokuCLI</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="section" id="experience">
+                <table>
+                    <caption><h2>Experience</h2></caption>
+                    <tr>
+                        <td style="font-weight: bold;">
+                            <a href="https://order.mrktbox.com/" target="_blank" rel="noopener noreferrer">MRKTBOX Inc.</a>
+                            x
+                            <a href="https://ca.linkedin.com/company/batched" target="_blank" rel="noopener noreferrer">Batched Inc.</a>
+                        </td>
+                        <td style="text-align: right;">Apr 2023 to Sep 2024</td>
+                    </tr>
+                    <tr>
+                        <td>Full-Stack Web Developer</td>
+                        <td style="text-align: right;">Hamilton, Ontario</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Developed full-stack web apps with React and Django to manage delivery operations.</li>
+                                <li>Created 40+ instructional videos to assist customers with our legacy & new websites.</li>
+                                <li>Transitioned to the Batched business management system, adopted across 3 stores.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">
+                            Mohawk College
+                        </td>
+                        <td style="text-align: right;">Jan 2022 to Apr 2022</td>
+                    </tr>
+                    <tr>
+                        <td>Learning Technology Support Assistant</td>
+                        <td style="text-align: right;">Hamilton, Ontario</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Provided Level 1 technical support to students navigating the Mohawk CMS.</li>
+                                <li>Assisted with in-person and remote troubleshooting in a Maker Space environment.</li>
+                                <li>Transitioned to the Batched business management system, adopted across 3 stores.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="section" id="projects">
+                <table>
+                    <caption><h2>Projects</h2></caption>
+                    <tr>
+                        <td style="font-weight: bold;gap:10%;">
+                            Personal Project | "IdeaBurn" | <a href="https://ideaburn.xyz" target="_blank" rel="noopener noreferrer">https://ideaburn.xyz</a>
+                        </td>
+                        <td style="text-align: right;">Jan 2025 to Mar 2025</td>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>Developed a full-stack idea-sharing platform using Django, React, and SQLite.</li>
+                                    <li>Implemented Admin/Viewer permissions and scalable post management features.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Software Engineering Project |  "TheBigFour" | Mohawk College</td>
+                        <td style="text-align: right;">Jan 2024 to Apr 2024</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Paired with an HVAC company to quicken their manual account data entry.</li>
+                                <li>Enabled users to create presets on pdf invoices for individual vendors.</li>
+                                <li>Incoming invoices were parsed by the backend, and integrated into QuickBooks.</li>
+                            </ul>
+                        </td>
+                        </tr>
+                    <tr>
+                        <td style="font-weight: bold;">
+                            Capstone Project | "TeaBank" | <a href="https://teabankclient-d9c62f61e84a.herokuapp.com/" target="_blank" rel="noopener noreferrer">https://teabankclient-d9c62f61e84a.herokuapp.com/</a>
+                        </td>
+                        <td style="text-align: right;">Sep 2024 to Jan 5 2025</td>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>Built a full-stack eCommerce site with customer and admin roles.</li>
+                                    <li>Integrated PayPal and Google Maps APIs for payment & address lookup.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tr>
+                </table>
+            </div>
+        </div> -->
+    </body>
+</html>

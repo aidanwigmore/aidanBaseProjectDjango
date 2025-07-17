@@ -13,3 +13,10 @@ def register(request):
 
 def home(request):
     return render(request, 'home.html')
+
+def example_resume(request):
+    return render(request, 'example_resume.html')
+
+def creator(request):
+    return render(request, 'creator.html')
+

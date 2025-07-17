@@ -1,0 +1,136 @@
+{% include "navbar.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Aidan's Resume Creator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <style>
+            .page { display: none; }
+            .page.active { display: block; }
+        </style>
+    </head>
+    <body>
+        <form id="myForm" style="width: 99%; display: flex; flex-direction: column; align-items: center; " method="post">
+            {% csrf_token %}
+            <div class="page active">
+                <h2>Header</h2>
+                <div>
+                    <input type="text" name="name" placeholder="Name" style="flex-basis: 100%;" required>
+                </div>
+                <div>
+                    <input type="email" name="email" placeholder="Email">
+                    <input type="tel" name="phone" placeholder="123-456-7890">
+                </div>
+                <!-- <div>
+                    <input type="text" name="label" placeholder="Label">
+                    <input type="url" name="url" placeholder="URL">
+                    <button type="button" id="addLinkBtn">+</button>
+                </div>
+                <div id="comboList"></div>
+                <button type="button" onclick="nextPage()">Next</button> -->
+                <button type="submit">Create Resume</button>
+            </div>
+            <!-- <div class="page">
+                <h2>Education</h2>
+                <div>
+                    <div>
+                        <input type="radio" id="university" name="institutionChoice" value="university">
+                        <label for="university">University</label>
+                        <input type="radio" id="college" name="institutionChoice" value="college">
+                        <label for="college">College</label>
+                    </div>
+                    <label for="accredation">Accredation:</label>
+                        <select name="accredation" id="accredation">
+                        <option value="Certificate">Certificate</option>
+                        <option value="Diploma">Diploma</option>
+                        <option value="AdvancedDiploma">Advanced Diploma</option>
+                        <option value="AssociateDegree">Associate Degree</option>
+                        <option value="BachelorDegree">Bachelor's Degree</option>
+                        <option value="MasterDegree">Master's Degree</option>
+                        <option value="DoctorateDegree">Doctorate Degree</option>
+                    </select>
+                    <input type="text" name="programName" placeholder="Program Name">
+                    <label for="school">School:</label>
+                    <select name="school" id="school">
+                        <option>Loading...</option>
+                    </select>
+                    <div>
+                        <label for="educationStartDate">Start Date:</label>
+                        <input type="date" id="educationStartDate" name="educationStartDate">
+                        <label for="educationEndDate">End Date:</label>
+                        <input type="date" id="educationEndDate" name="educationEndDate">
+                    </div>
+                    <div id="mapid"></div>
+                </div>
+                <h2>Skills</h2>
+                <div>
+                    <input type="text" name="skillLabel" placeholder="Skill Label">
+                    <input type="text" name="skillName" placeholder="Skill Name">
+                    <button type="button" id="addSkillBtn">+</button>
+                </div>
+                <button type="button" onclick="prevPage()">Previous</button>
+                <button type="button" onclick="nextPage()">Next</button>
+            </div>
+            <div class="page">
+                <h2>Experience</h2>
+                <input type="text" name="experienceInstitutionName" placeholder="Institution Name" style="flex-basis: 100%;" required>
+                <input type="text" name="experienceRoleName" placeholder="Role Name" style="flex-basis: 100%;" required>
+                <div>
+                    <label for="experienceStartDate">Start Date:</label>
+                    <input type="date" id="experienceStartDate" name="experienceStartDate">
+                    <label for="experienceEndDate">End Date:</label>
+                    <input type="date" id="experienceEndDate" name="experienceEndDate">
+                </div>
+                <h2>Projects</h2>
+                <input type="text" name="projectShortName" placeholder="Project Type" style="flex-basis: 100%;" required>
+                <input type="text" name="projectName" placeholder="Project Name" style="flex-basis: 100%;" required>
+                <input type="text" name="projectUrl" placeholder="Url" style="flex-basis: 100%;">
+                <div>
+                    <label for="projectStartDate">Start Date:</label>
+                    <input type="date" id="projectStartDate" name="projectStartDate">
+                    <label for="projectEndDate">End Date:</label>
+                    <input type="date" id="projectEndDate" name="experienceEndDate">
+                </div>
+                <button type="button" onclick="prevPage()">Previous</button>
+                <button type="button" onclick="nextPage()">Next</button>
+            </div> -->
+        </form>
+        <script>
+            let currentPage = 0;
+            const pages = document.querySelectorAll('.page');
+
+            function showPage(index) {
+                pages.forEach((page, i) => {
+                    page.classList.toggle('active', i === index);
+                });
+            }
+
+            function nextPage() {
+                if (currentPage < pages.length - 1) {
+                    currentPage++;
+                    showPage(currentPage);
+                }
+            }
+
+            function prevPage() {
+                if (currentPage > 0) {
+                    currentPage--;
+                    showPage(currentPage);
+                }
+            }
+
+            // Optional: Prevent form submission if not on last page
+            document.getElementById('multiStepForm').addEventListener('submit', function(e) {
+                if (currentPage < pages.length - 1) {
+                    e.preventDefault();
+                    nextPage();
+                }
+            });
+        </script>
+    </body>
+</html>
+

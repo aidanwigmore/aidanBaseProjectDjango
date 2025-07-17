@@ -1,0 +1,13 @@
+{% include "navbar.html" %}
+<h2>Resumes</h2>
+<ul>
+    {% for resume in resumes %}
+        <li>
+            <a href="{% url 'resume_detail' resume.pk %}">{{ resume.name }}</a>
+        </li>
+    {% empty %}
+        <li>No resumes found.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'resume_create' %}">Create New Resume</a>

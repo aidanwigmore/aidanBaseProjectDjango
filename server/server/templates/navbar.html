@@ -1,5 +1,5 @@
-{% include "navbar.html" %}
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,11 +11,10 @@
         <link rel="stylesheet" href="{% static 'css/formStyle.css' %}">
     </head>
     <body>
-        <form method="post">
-            {% csrf_token %}
-            <h1>Login</h1>
-            {{ form.as_p }}
-                <button type="submit">Login</button>
-            </form>
+        <a href="{% url 'login' %}"><button type="button">Login</button></a>
+        <a href="{% url 'register' %}"><button type="button">Register</button></a>
+        <a href="{% url 'example' %}"><button type="button">Example</button></a>
+        <a href="{% url 'resume_index' %}"><button type="button">Resumes</button></a>
+        <hr class="solid"/>
     </body>
 </html>

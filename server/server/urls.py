@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
+from resumes import views as resume_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,8 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('example/', views.example_resume, name='example'),
+    path('resume/', resume_views.resume_index, name='resume_index'), # List/select resumes
+    path('resume/create/', resume_views.resume_create, name='resume_create'), # Create resume
+    path('resume/<int:pk>/', resume_views.resume_detail, name='resume_detail'), # View resume
 ]

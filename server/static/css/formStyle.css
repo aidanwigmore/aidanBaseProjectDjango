@@ -1,0 +1,34 @@
+form {
+    width: 99%; 
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    border-radius: 8px;
+}
+
+button:hover {opacity: 90%;}
+
+.nextButton {
+    background-color: green;
+    color: white;
+}
+
+.previousButton {
+    background-color: red;
+    color: white;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
