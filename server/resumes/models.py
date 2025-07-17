@@ -1,4 +1,6 @@
 from django.db import models
+from django import forms
+from django.forms import inlineformset_factory
 
 # Create your models here.
 class Resume(models.Model):
@@ -62,3 +64,15 @@ class ResumeProject(models.Model):
 
     def __str__(self):
         return self.project_name
+
+class ResumeForm(forms.ModelForm):
+    class Meta:
+        model = Resume
+        fields = ['name', 'email', 'phone']
+
+    ResumeURLFormSet = inlineformset_factory(
+        Resume, ResumeURL,
+        fields=['label', 'url'],
+        extra=1,
+        can_delete=True
+    )

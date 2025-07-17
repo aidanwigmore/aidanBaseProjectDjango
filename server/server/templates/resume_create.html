@@ -25,14 +25,59 @@
                     <input type="email" name="email" placeholder="Email">
                     <input type="tel" name="phone" placeholder="123-456-7890">
                 </div>
-                <!-- <div>
-                    <input type="text" name="label" placeholder="Label">
-                    <input type="url" name="url" placeholder="URL">
-                    <button type="button" id="addLinkBtn">+</button>
+                <h2 style="margin-top: 5%">Add Urls</h2>
+                <div id="url-formset">
+                    {% for url_form in formset %}
+                        <div class="url-form">
+                            {{ url_form.label }} {{ url_form.url }}
+                            {% if url_form.instance.pk %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button style="margin: 5%" type="button" onclick="addUrlForm()">+ Add URL</button>
                 </div>
-                <div id="comboList"></div>
-                <button type="button" onclick="nextPage()">Next</button> -->
-                <button type="submit">Create Resume</button>
+                {{ formset.management_form }}
+                <script>
+                    function addUrlForm() {
+                        var formCount = document.querySelectorAll('.url-form').length;
+                        var totalForms = document.getElementById('id_urls-TOTAL_FORMS');
+                        var newFormNum = formCount;
+
+                        var lastForm = document.querySelectorAll('.url-form')[formCount - 1];
+                        var lastLabel = lastForm ? lastForm.querySelector('input[name$="-label"]').value : '';
+                        var lastUrl = lastForm ? lastForm.querySelector('input[name$="-url"]').value : '';
+
+                        // Clone the empty form template
+                        var emptyFormHtml = document.getElementById('empty-form').innerHTML.replace(/__prefix__/g, newFormNum);
+                        var tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = emptyFormHtml;
+                        tempDiv.classList.add('url-form');
+                        document.getElementById('url-formset').appendChild(tempDiv);
+
+                        // Set values in the new form
+                        tempDiv.querySelector('input[name$="-label"]').value = lastLabel;
+                        tempDiv.querySelector('input[name$="-url"]').value = lastUrl;
+
+                        document.getElementById('url-formset').appendChild(tempDiv);
+
+                        // Update TOTAL_FORMS count
+                        totalForms.value = newFormNum + 1;
+                        // Clear the first form's label and url fields
+                        var firstForm = document.querySelectorAll('.url-form')[0];
+                        if (firstForm) {
+                            var firstLabelInput = firstForm.querySelector('input[name$="-label"]');
+                            var firstUrlInput = firstForm.querySelector('input[name$="-url"]');
+                            if (firstLabelInput) firstLabelInput.value = '';
+                            if (firstUrlInput) firstUrlInput.value = '';
+                        }
+                    }
+                </script>
+
+                <!-- Hidden empty form template for JS cloning -->
+                <div id="empty-form" style="display:none;">
+                    <h2>Your URLs</h2>
+                    {{ formset.empty_form.as_p|safe }}
+                </div>
             </div>
             <!-- <div class="page">
                 <h2>Education</h2>
@@ -98,6 +143,7 @@
                 <button type="button" onclick="prevPage()">Previous</button>
                 <button type="button" onclick="nextPage()">Next</button>
             </div> -->
+            <button style="margin: 10%;" type="submit">Create Resume</button>
         </form>
         <script>
             let currentPage = 0;

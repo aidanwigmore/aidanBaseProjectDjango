@@ -30,4 +30,5 @@ urlpatterns = [
     path('resume/', resume_views.resume_index, name='resume_index'), # List/select resumes
     path('resume/create/', resume_views.resume_create, name='resume_create'), # Create resume
     path('resume/<int:pk>/', resume_views.resume_detail, name='resume_detail'), # View resume
+    path('resume/<int:pk>/delete/', resume_views.resume_delete, name='resume_delete'),
 ]
