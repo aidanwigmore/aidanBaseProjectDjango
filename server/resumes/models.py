@@ -16,26 +16,35 @@ class ResumeURL(models.Model):
     def __str__(self):
         return f"{self.label} - {self.url}"
 
+ACCREDITATION_CHOICES = [
+    (0, 'None'),
+    (1, 'Certificate'),
+    (2, 'Diploma'),
+    (3, 'Advanced Diploma'),
+    (4, 'Associate Degree'),
+    (5, 'Master Degree'),
+    (6, 'Doctorate Degree'),
+]
+
+INSTITUTION_TYPE_CHOICES = [
+    (0, 'None'),
+    (1, 'College'),
+    (2, 'University'),
+]
+
 class ResumeEducation(models.Model):
     resume = models.ForeignKey(Resume, related_name='education', on_delete=models.CASCADE)
     institution_name = models.CharField(max_length=100)
-    institution_type = models.BooleanField(default=False)
     program_name = models.CharField(max_length=100, blank=True)
     
-    accreditation = models.IntegerField(default=0)
-    # none - 0
-    # certificate - 1
-    # diploma - 2
-    # advanced diploma - 3
-    # associate degree - 4
-    # master degree - 5
-    # doctorate degree - 6
+    institution_type = models.IntegerField(choices=INSTITUTION_TYPE_CHOICES, default=0)
+    accreditation = models.IntegerField(choices=ACCREDITATION_CHOICES, default=0)
     
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.institution_name} - {self.degree}"
+        return f"{self.institution_name} - {self.accredation}"
 
 class ResumeSkill(models.Model):
     resume = models.ForeignKey(Resume, related_name='skills', on_delete=models.CASCADE)

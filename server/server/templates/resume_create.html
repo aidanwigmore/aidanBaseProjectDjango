@@ -18,25 +18,28 @@
             {% csrf_token %}
             <div class="page active">
                 <h2>Header</h2>
-                <div>
-                    <input type="text" name="name" placeholder="Name" style="flex-basis: 100%;" required>
+                <div style="margin-top: 5%;">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" placeholder="Ex: Joe Cool" style="flex-basis: 100%;" required>
                 </div>
                 <div>
-                    <input type="email" name="email" placeholder="Email">
-                    <input type="tel" name="phone" placeholder="123-456-7890">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" placeholder="Ex: Email@mail.xyz">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" name="phone" placeholder="Ex: 123-456-7890">
                 </div>
                 <h2 style="margin-top: 5%">Add Urls</h2>
                 <div id="url-formset">
-                    {% for url_form in formset %}
+                    {% for url_form in url_formset %}
                         <div class="url-form">
-                            {{ url_form.label }} {{ url_form.url }}
+                            Label: {{ url_form.label }} Url: {{ url_form.url }}
                             {% if url_form.instance.pk %}
                             {% endif %}
                         </div>
                     {% endfor %}
                     <button style="margin: 5%" type="button" onclick="addUrlForm()">+ Add URL</button>
                 </div>
-                {{ formset.management_form }}
+                {{ url_formset.management_form }}
                 <script>
                     function addUrlForm() {
                         var formCount = document.querySelectorAll('.url-form').length;
@@ -76,12 +79,35 @@
                 <!-- Hidden empty form template for JS cloning -->
                 <div id="empty-form" style="display:none;">
                     <h2>Your URLs</h2>
-                    {{ formset.empty_form.as_p|safe }}
+                    {{ url_formset.empty_form.as_p|safe }}
                 </div>
+            <button style="background-color: lightblue" type="button" onclick="nextPage()">Next</button>
             </div>
-            <!-- <div class="page">
+            <div class="page">
                 <h2>Education</h2>
-                <div>
+                {{ edu_formset.management_form }}
+                {{ edu_formset.management_form }}
+                <div style="margin-top: 5%;" id="education-formset">
+                    {% for edu_form in edu_formset %}
+                        <div class="education-form">
+                            Institution Type: {{ edu_form.institution_type }}
+                            <div>
+                                Institution Name: {{ edu_form.institution_name }} 
+                                Program Name: {{ edu_form.program_name }}
+                            </div>
+                            Accedation: {{ edu_form.accreditation }}
+                            <div>
+                                Start: {{ edu_form.start_date }} End: {{ edu_form.end_date }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Add a hidden empty form template for JS cloning if you want dynamic add -->
+                <div id="empty-education-form" style="display:none;">
+                    {{ edu_formset.empty_form.as_p|safe }}
+                </div>
+                <!-- <div style="margin-top: 5%;">
                     <div>
                         <input type="radio" id="university" name="institutionChoice" value="university">
                         <label for="university">University</label>
@@ -89,7 +115,7 @@
                         <label for="college">College</label>
                     </div>
                     <label for="accredation">Accredation:</label>
-                        <select name="accredation" id="accredation">
+                    <select name="accredation" id="accredation">
                         <option value="Certificate">Certificate</option>
                         <option value="Diploma">Diploma</option>
                         <option value="AdvancedDiploma">Advanced Diploma</option>
@@ -98,29 +124,35 @@
                         <option value="MasterDegree">Master's Degree</option>
                         <option value="DoctorateDegree">Doctorate Degree</option>
                     </select>
-                    <input type="text" name="programName" placeholder="Program Name">
-                    <label for="school">School:</label>
-                    <select name="school" id="school">
-                        <option>Loading...</option>
-                    </select>
                     <div>
+                        <label for="programName">Program Name:</label>
+                        <input type="text" name="programName" placeholder="Program Name">
+                    </div>
+                    <div>
+                        <label for="school">School:</label>
+                        <select name="school" id="school" style="width: 250px;max-width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+                            <option>Loading...</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 5%;">
                         <label for="educationStartDate">Start Date:</label>
                         <input type="date" id="educationStartDate" name="educationStartDate">
                         <label for="educationEndDate">End Date:</label>
                         <input type="date" id="educationEndDate" name="educationEndDate">
                     </div>
-                    <div id="mapid"></div>
-                </div>
-                <h2>Skills</h2>
+                </div> -->
+                <button style="margin-top:5%;" type="button" onclick="prevPage()">Previous</button>
+                <button style="background-color: lightblue;" type="button" onclick="nextPage()">Next</button>
+                <!-- <h2>Skills</h2>
                 <div>
                     <input type="text" name="skillLabel" placeholder="Skill Label">
                     <input type="text" name="skillName" placeholder="Skill Name">
                     <button type="button" id="addSkillBtn">+</button>
                 </div>
                 <button type="button" onclick="prevPage()">Previous</button>
-                <button type="button" onclick="nextPage()">Next</button>
+                <button type="button" onclick="nextPage()">Next</button> -->
             </div>
-            <div class="page">
+            <!-- <div class="page">
                 <h2>Experience</h2>
                 <input type="text" name="experienceInstitutionName" placeholder="Institution Name" style="flex-basis: 100%;" required>
                 <input type="text" name="experienceRoleName" placeholder="Role Name" style="flex-basis: 100%;" required>
@@ -143,7 +175,7 @@
                 <button type="button" onclick="prevPage()">Previous</button>
                 <button type="button" onclick="nextPage()">Next</button>
             </div> -->
-            <button style="margin: 10%;" type="submit">Create Resume</button>
+            <button style="margin: 10%;background-color: lightyellow;" type="submit">Create Resume</button>
         </form>
         <script>
             let currentPage = 0;
@@ -176,6 +208,62 @@
                     nextPage();
                 }
             });
+        </script>
+        <script>
+            const form = document.querySelector('form');
+            
+            // Access radio buttons after form is loaded
+            const institutionRadios = form.querySelectorAll('input[name="institutionChoice"]');
+            institutionRadios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                if (radio.checked) {
+                    if (radio.value === 'university') {
+                    // Load universities into the select
+                    loadUniversities('university');
+                    } else if (radio.value === 'college') {
+                    // Load colleges into the select
+                    loadUniversities('college');
+                    }
+                }
+                });
+            });
+            function loadUniversities(type) {
+                let file = type === 'college' ? 'CADcolleges.txt' : 'CADuniversities.txt';
+                fetch('/static/txt/' + file)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to load file');
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        const lines = data.split('\n').map(line => line.trim()).filter(Boolean);
+                        const schools = lines.map(line => line.split(',')[0]);
+                        const uniqueSorted = [...new Set(schools)].sort((a, b) => a.localeCompare(b));
+
+                        const select = document.getElementById('school');
+                        if (!select) return;
+                        select.innerHTML = ""; // clear previous options
+
+                        // Add a default option
+                        const defaultOption = document.createElement('option');
+                        defaultOption.value = "";
+                        defaultOption.textContent = "Select a school";
+                        select.appendChild(defaultOption);
+
+                        uniqueSorted.forEach(school => {
+                            const option = document.createElement('option');
+                            option.value = school;
+                            option.textContent = school;
+                            select.appendChild(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        const select = document.getElementById('school');
+                        if(select) select.innerHTML = '<option>Error loading schools</option>';
+                    });
+            }
         </script>
     </body>
 </html>

@@ -3,7 +3,7 @@ from resumes.forms import ResumeForm
 from django.shortcuts import render, redirect
 from django.http import Http404
 from django.shortcuts import redirect, get_object_or_404
-from resumes.forms import ResumeURLFormSet
+from resumes.forms import ResumeURLFormSet, ResumeEducationFormSet
 
 def resume_index(request):
     # Show list of resumes
@@ -11,21 +11,28 @@ def resume_index(request):
     return render(request, 'resume_index.html', {'resumes': resumes})
 
 def resume_create(request):
-    # Show form to create resume
     if request.method == 'POST':
         form = ResumeForm(request.POST)
         if form.is_valid():
             resume = form.save()
-            formset = ResumeURLFormSet(request.POST, instance=resume)
-            if formset.is_valid():
-                formset.save()
+            url_formset = ResumeURLFormSet(request.POST, instance=resume)
+            edu_formset = ResumeEducationFormSet(request.POST, instance=resume)
+            if url_formset.is_valid() and edu_formset.is_valid():
+                url_formset.save()
+                edu_formset.save()
                 return redirect('resume_detail', pk=resume.pk)
         else:
-            formset = ResumeURLFormSet(request.POST)
+            url_formset = ResumeURLFormSet(request.POST)
+            edu_formset = ResumeEducationFormSet(request.POST)
     else:
         form = ResumeForm()
-        formset = ResumeURLFormSet()
-    return render(request, 'resume_create.html', {'form': form, 'formset': formset})
+        url_formset = ResumeURLFormSet()
+        edu_formset = ResumeEducationFormSet()
+    return render(request, 'resume_create.html', {
+        'form': form,
+        'url_formset': url_formset,
+        'edu_formset': edu_formset,
+    })
 
 def resume_detail(request, pk):
     # Show a specific resume
